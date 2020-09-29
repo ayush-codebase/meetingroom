@@ -1,0 +1,78 @@
+@import '../../variables.scss';
+
+$themecolor: pink;
+
+main {
+  width: 17vw;
+  border-radius: 2vh;
+  background-color: map-get($bg-color, $themecolor);
+  padding: 4vh;
+  & div:first-child {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+}
+h3 {
+  display: inline-block;
+  color: map-get($font-color, $themecolor);
+}
+h6 {
+  margin-top: 1vh;
+  color: map-get($font-color-subtext, $themecolor);
+  font-size: 0.8em;
+}
+img {
+  height: 2.5vw;
+  width: 2.5vw;
+  border-radius: 2vw;
+  object-fit: cover;
+  position: relative;
+  &:not(:first-of-type) {
+    left: -10px;
+  }
+}
+.footer {
+  margin-top: 4vh;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.mode {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px;
+  background-color: map-get($font-color-subtext, $themecolor);
+}
+.type {
+  border-radius: 8px;
+  padding: 10px;
+  display: inline-block;
+  height: 35px;
+  width: 35px;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  &.selected {
+    box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.1);
+    z-index: 2;
+    background-color: white;
+  }
+}
+
+[class^='gg-'] {
+  color: map-get($font-color, $themecolor);
+}
+.gg-camera {
+  --ggs: 1;
+}
+.gg-mic {
+  --ggs: 0.7;
+}
+.gg-close {
+  --ggs: 0.8;
+  cursor: pointer;
+}

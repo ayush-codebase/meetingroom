@@ -1,0 +1,87 @@
+<main>
+  <h1>New Meeting</h1>
+  <form (ngSubmit)="submit()" [formGroup]="booking">
+    <div class="wrapper">
+      <label for="to">User name</label>
+      <input type="text" formControlName="username" placeholder="Username" />
+    </div>
+    <div class="wrapper">
+      <label for="to">Room</label>
+      <input
+        id="room"
+        formControlName="room"
+        (click)="roomListVisible = true"
+        (blur)="setFilter(room?.value)"
+        [value]="room?.value | titlecase"
+      />
+      <ul class="select-list" [class.visible]="roomListVisible">
+        <li
+          class="select-item"
+          *ngFor="let room of allRooms | filter: room?.value:'value'"
+          (click)="selectRoom(room?.value)"
+        >
+          {{ room?.name | titlecase }}
+        </li>
+      </ul>
+    </div>
+    <div class="wrapper">
+      <label for="to">Date</label>
+      <input type="date" formControlName="date" placeholder="date" />
+    </div>
+    <section id="duration">
+      <div class="wrapper">
+        <label for="to">Meeting From</label>
+        <input
+          id="startTime"
+          formControlName="from"
+          (click)="fromTimeVisible = true"
+          [value]="startTime?.value | time"
+        />
+        <ul class="select-list" [class.visible]="fromTimeVisible">
+          <li class="select-item" *ngFor="let slot of meetingFromTimings" (click)="selectStartTime(slot)">
+            {{ slot | time }}
+          </li>
+        </ul>
+      </div>
+      <div class="wrapper">
+        <label for="to">Meeting To</label>
+        <input id="endTime" formControlName="to" (click)="toTimeVisible = true" [value]="endTime?.value | time" />
+        <ul class="select-list" [class.visible]="toTimeVisible">
+          <li class="select-item" *ngFor="let slot of meetingToTimings" (click)="selectEndTime(slot)">
+            {{ slot | time }}
+          </li>
+        </ul>
+      </div>
+    </section>
+    <div class="wrapper">
+      <label for="to">Meeting Agenda</label>
+      <input type="text" formControlName="agenda" placeholder="Agenda" />
+    </div>
+    <section class="errors">
+      <div *ngIf="username?.touched && username?.hasError('required')">
+        <i class="gg-danger"></i><span>Username is required</span>
+      </div>
+      <div *ngIf="agenda?.touched && agenda?.hasError('required')"><i class="gg-danger"></i>Agenda is required</div>
+      <div *ngIf="startTime?.touched && startTime?.hasError('required')">
+        <i class="gg-danger"></i><span>Meeting start time is required</span>
+      </div>
+      <div *ngIf="endTime?.touched && endTime?.hasError('required')">
+        <i class="gg-danger"></i><span>Meeting end time is required</span>
+      </div>
+      <div *ngIf="day?.touched && day?.hasError('required')">
+        <i class="gg-danger"></i><span>Meeting date is required</span>
+      </div>
+      <div *ngIf="room?.touched && room?.hasError('required')">
+        <i class="gg-danger"></i><span>Meeting room is required</span>
+      </div>
+      <div *ngIf="endTime?.touched && endTime?.hasError('duration')">
+        <i class="gg-danger"></i><span>Minimum meeting duration is 30 min</span>
+      </div>
+      <div *ngIf="prebookedMeeting">
+        <i class="gg-danger"></i
+        ><span>Room already booked from {{ prebookedMeeting?.from | time }} to {{ prebookedMeeting?.to | time }}</span>
+      </div>
+    </section>
+    <button type="submit" [disabled]="booking?.invalid">Submit</button>
+  </form>
+</main>

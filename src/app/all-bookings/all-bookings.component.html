@@ -1,0 +1,7 @@
+<h1>
+  <ng-container *ngIf="filterRoom"> {{ filterRoom | titlecase }} Meetings </ng-container>
+  <ng-container *ngIf="!filterRoom"> All Meetings </ng-container>
+</h1>
+<main>
+  <app-meeting *ngFor="let meeting of meetings | async | filter: filterRoom:'room'" [meeting]="meeting"> </app-meeting>
+</main>

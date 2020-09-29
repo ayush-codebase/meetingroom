@@ -1,0 +1,15 @@
+@import '../../variables.scss';
+main {
+  margin-left: 10vh;
+  display: grid;
+  grid-template-columns: auto auto auto;
+  row-gap: 2vh;
+  column-gap: 2vh;
+}
+h1 {
+  display: inline-block;
+  font-size: 36px;
+  font-weight: bold;
+  color: map-get($font-color, purple);
+  margin: 5vh 0 5vh 10vh;
+}

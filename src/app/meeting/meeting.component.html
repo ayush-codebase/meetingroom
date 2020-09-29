@@ -1,0 +1,18 @@
+<main>
+  <div>
+    <h3>{{ meeting?.agenda }}</h3>
+    <i class="gg-close" title="cancel meeting" (click)="cancelMeeting(meeting?.id)"></i>
+  </div>
+  <h6>{{ meeting?.from | time }} - {{ meeting?.to | time }}</h6>
+  <h6>{{ meeting?.room | titlecase }}</h6>
+  <div class="footer">
+    <div id="participants">
+      <img src="assets/images/img2.jpg" alt="" />
+      <img src="assets/images/img1.jpg" alt="" />
+    </div>
+    <span class="mode">
+      <span class="type" [class.selected]="meeting?.type == 'VIDEO' || !meeting?.type"><i class="gg-camera"></i></span>
+      <span CLASS="type" [class.selected]="meeting?.type == 'VOICE'"><i class="gg-mic"></i></span>
+    </span>
+  </div>
+</main>
